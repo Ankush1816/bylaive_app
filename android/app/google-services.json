@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "474568791761",
+    "project_id": "bylaive-aeeeb",
+    "storage_bucket": "bylaive-aeeeb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474568791761:android:53bc1bd7309a063cbf17f0",
+        "android_client_info": {
+          "package_name": "com.example.bylaive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474568791761-84c5qf9ks5qkr1bdf88hq43a5h6ctki4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bylaive",
+            "certificate_hash": "1e9170f4a1a9db510d69fd9119ddaf03c7cc9d9c"
+          }
+        },
+        {
+          "client_id": "474568791761-p519epbj79ldkhs502t6edavnb1qjuc4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6X6MkTI9QtvyFov9UwiWNG9JWqPOknok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474568791761-p519epbj79ldkhs502t6edavnb1qjuc4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
