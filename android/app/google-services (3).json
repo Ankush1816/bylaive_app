@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "354546861665",
+    "project_id": "bylaive-f76b0",
+    "storage_bucket": "bylaive-f76b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354546861665:android:4226b238e8fc1b08ae8c20",
+        "android_client_info": {
+          "package_name": "com.ank.bylaive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354546861665-288ld15nv7vpt3jfivgso0jo5cnvcjin.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ank.bylaive",
+            "certificate_hash": "1e9170f4a1a9db510d69fd9119ddaf03c7cc9d9c"
+          }
+        },
+        {
+          "client_id": "354546861665-1g55t9f23p0jfpkfrm9971pdhue5ahhm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnFvWrz-66LvXNKUu64klQ8NQg2Auac1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354546861665-1g55t9f23p0jfpkfrm9971pdhue5ahhm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "354546861665-11gpcnm0niuumi540al5r8fl4fhqsslc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bylaive"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354546861665:android:9e990e6919bcc7c5ae8c20",
+        "android_client_info": {
+          "package_name": "com.example.bylaive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354546861665-1g55t9f23p0jfpkfrm9971pdhue5ahhm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnFvWrz-66LvXNKUu64klQ8NQg2Auac1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354546861665-1g55t9f23p0jfpkfrm9971pdhue5ahhm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "354546861665-11gpcnm0niuumi540al5r8fl4fhqsslc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bylaive"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

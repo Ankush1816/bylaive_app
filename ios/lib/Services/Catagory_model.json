@@ -1,0 +1,66 @@
+
+
+import 'package:meta/meta.dart';
+import 'dart:convert';
+
+CatagoryModel catagoryModelFromJson(String str) => CatagoryModel.fromJson(json.decode(str));
+
+String catagoryModelToJson(CatagoryModel data) => json.encode(data.toJson());
+
+class CatagoryModel {
+CatagoryModel({
+required this.catagories,
+});
+
+List<Catagory> catagories;
+
+factory CatagoryModel.fromJson(Map<String, dynamic> json) => CatagoryModel(
+catagories: List<Catagory>.from(json["catagories"].map((x) => Catagory.fromJson(x))),
+);
+
+Map<String, dynamic> toJson() => {
+"catagories": List<dynamic>.from(catagories.map((x) => x.toJson())),
+};
+}
+
+class Catagory {
+Catagory({
+required this.name,
+required this.subcatagory,
+});
+
+Name name;
+List<String> subcatagory;
+
+factory Catagory.fromJson(Map<String, dynamic> json) => Catagory(
+name: nameValues.map[json["name"]],
+subcatagory: List<String>.from(json["subcatagory"].map((x) => x)),
+);
+
+Map<String, dynamic> toJson() => {
+"name": nameValues.reverse[name],
+"subcatagory": List<dynamic>.from(subcatagory.map((x) => x)),
+};
+}
+
+enum Name { WOMEN_DRESS, MEN_S_DRESS, HOME_DECOR }
+
+final nameValues = EnumValues({
+"Home decor": Name.HOME_DECOR,
+"Men's dress": Name.MEN_S_DRESS,
+"Women dress": Name.WOMEN_DRESS
+});
+
+class EnumValues<T> {
+Map<String, T> map;
+Map<T, String> reverseMap;
+
+EnumValues(this.map);
+
+Map<T, String> get reverse {
+if (reverseMap == null) {
+reverseMap = map.map((k, v) => new MapEntry(v, k));
+}
+return reverseMap;
+}
+}
