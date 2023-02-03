@@ -20,7 +20,6 @@ class _OptionsState extends State<Options> {
           TextField(controller: controller,),
           ElevatedButton(onPressed: (){
             final name=controller.text;
-            createuser(name:name);
           }, child: Text('submit'))
         ],
       ),
@@ -28,27 +27,3 @@ class _OptionsState extends State<Options> {
   }
 }
 
-Future createuser({required String name}) async{
-  final docUser=FirebaseFirestore.instance.collection('Users').doc();
- final user=User(
-   id:docUser.id,
-   name:name,
- );
- final json=user.toJson();
-  await docUser.set(json);
-
-  
-}
-
-class User{
-  String id;
-  final String name;
-  User({
-   this.id='',
-   required this.name,
-});
-  Map<String, dynamic> toJson()=>{
-    'id':id,
-    'name':name
-  };
-}

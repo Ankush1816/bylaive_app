@@ -32,13 +32,13 @@ class MyApp extends StatelessWidget {
         /* light theme settings */
       ),
       darkTheme: ThemeData(
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         hintColor: Color(0xFFFCAF3B),
         primaryColor: Color(0xFFFCAF3B),
 
         /* dark theme settings */
       ),
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.system,
       /* ThemeMode.system to follow system theme,
          ThemeMode.light for light theme,
          ThemeMode.dark for dark theme

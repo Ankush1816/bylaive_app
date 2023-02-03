@@ -1,14 +1,23 @@
 import 'package:bylaive/Authentication/SignUp.dart';
 import 'package:bylaive/Authentication/Userredirect.dart';
+import 'package:bylaive/Constants/TandC.dart';
+import 'package:bylaive/Controllers/Auth_controller.dart';
 import 'package:bylaive/Splash.dart';
 import 'package:bylaive/Authentication/login_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+import '../Seller/Becomeseller.dart';
+FirebaseAuth auth = FirebaseAuth.instance;
 
 class SignUp extends StatefulWidget {
   final VoidCallback showLoginpage;
@@ -23,18 +32,26 @@ class _SignUpState extends State<SignUp> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _phone = TextEditingController();
+  final TextEditingController _address = TextEditingController();
+  final TextEditingController _seller = TextEditingController();
+
   late bool _success;
   late String _userEmail;
   bool isChecked = false;
   bool newValue = true;
-  FirebaseAuth auth = FirebaseAuth.instance;
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: (Container(
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery
+            .of(context)
+            .size
+            .height,
         key: _formKey,
         width: double.infinity,
         child: Column(
@@ -45,7 +62,9 @@ class _SignUpState extends State<SignUp> {
                 decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(
-                            "https://i.postimg.cc/VNzmWn6r/IMG-20221020-WA0005.jpg"),
+                            "https://i.postimg.cc/VNzmWn6r/IMG-20221020-WA0005.jpg"
+
+                        ),
                         fit: BoxFit.cover)),
                 height: 110,
                 width: 110,
@@ -99,8 +118,8 @@ class _SignUpState extends State<SignUp> {
                   ),
                   TextField(
                     decoration: InputDecoration(
-                      icon: const Icon(Icons.mail),
-                      hintText: 'Email',
+                      icon: const Icon(Icons.person),
+                      hintText: 'Name',
                       //   helperText: 'Helper Text',
                       //  counterText: '0 characters',
                       border: OutlineInputBorder(
@@ -108,14 +127,16 @@ class _SignUpState extends State<SignUp> {
                         borderSide: const BorderSide(color: Color(0xFFFCAF3B)),
                       ),
                     ),
+                    controller: _name,
                   ),
                   const SizedBox(
                     height: 15,
                   ),
                   TextField(
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.mail),
-                      hintText: 'Email',
+                      icon: Icon(Icons.phone),
+                      hintText: 'Phone number',
                       //   helperText: 'Helper Text',
                       //  counterText: '0 characters',
                       border: OutlineInputBorder(
@@ -123,14 +144,15 @@ class _SignUpState extends State<SignUp> {
                         borderSide: BorderSide(color: Color(0xFFFCAF3B)),
                       ),
                     ),
+                    controller: _phone,
                   ),
                   SizedBox(
                     height: 15,
                   ),
                   TextField(
                     decoration: InputDecoration(
-                      icon: Icon(Icons.mail),
-                      hintText: 'Email',
+                      icon: Icon(Icons.home_filled),
+                      hintText: 'Address',
                       //   helperText: 'Helper Text',
                       //  counterText: '0 characters',
                       border: OutlineInputBorder(
@@ -138,6 +160,7 @@ class _SignUpState extends State<SignUp> {
                         borderSide: BorderSide(color: Color(0xFFFCAF3B)),
                       ),
                     ),
+                    controller: _address,
                   ),
                   SizedBox(
                     height: 5,
@@ -158,7 +181,7 @@ class _SignUpState extends State<SignUp> {
                       }),
                   Text("Please accept our"),
                   TextButton(
-                      onPressed: () {}, child: Text('terms and conditions.'))
+                      onPressed: () {Get.to(termpage());}, child: Text('terms and conditions.'))
                 ],
               ),
             ),
@@ -167,7 +190,13 @@ class _SignUpState extends State<SignUp> {
                   primary: Color(0xFFFCAF3B),
                 ),
                 onPressed: () async {
-                  _register();
+                  if(isChecked==true){
+                    _register();
+                  }else{
+                    VxToast.show(context,
+                        msg: "Please accept our terms and conditions");
+                  }
+
                 },
                 child: Text('SignUp')),
             TextButton(
@@ -198,22 +227,78 @@ class _SignUpState extends State<SignUp> {
   }
 
   Future<void> _register() async {
-    try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+    if (isChecked = true) {
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+        createuser(
+            _emailController.text, _name.text, _phone.text, _address.text,_seller.text);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          VxToast.show(context, msg: 'weak password');
+        } else if (e.code == 'email-already-in-use') {
+          VxToast.show(context, msg: 'email already in use');
+        }
+      } catch (e) {
+        print(e);
       }
-    } catch (e) {
-      print(e);
+    } else {
+      VxToast.show(context, msg: 'Something went wrong');
     }
   }
+}
+
+Future createuser(String email, String name, String phone,
+    String address,String seller) async {
+  final docUser = FirebaseFirestore.instance.collection('Users').doc(FirebaseAuth.instance.currentUser?.uid);
+  final user = User(
+    id: docUser.id,
+    email: email,
+    name: name,
+    phone: phone,
+    address: address,
+    seller: seller,
+  );
+  final json = user.toJson();
+  await docUser.set(json);
+}
+
+class User {
+  String id;
+  final String email;
+  final String name;
+  final String phone;
+  final String address;
+  final String seller;
+
+  User({
+    required this.seller,
+    this.id = '',
+    required this.email,
+    required this.name,
+    required this.phone,
+    required this.address,
+  });
+
+  Map<String, dynamic> toJson() =>
+      {
+        'id': id,
+        'seller': seller,
+        'email': email,
+        'name': name,
+        'phone no': phone,
+        'address':address,
+        'cart_count': '00',
+        'wishlist_count': '00',
+        'order_count': '00'
+
+      };
+
+  static User fromJson(Map<String, dynamic> json) =>
+      User(email: json['email'], name: json['name'], phone: json['phone'], address: json['address'], seller: json['seller']);
+
 }
 
 Widget makeinput({label, obsecureText = false}) {
@@ -258,4 +343,5 @@ class GoogleSignInProvider extends ChangeNotifier {
     await FirebaseAuth.instance.signInWithCredential(credential);
     notifyListeners();
   }
+
 }

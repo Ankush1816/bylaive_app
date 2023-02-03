@@ -1,10 +1,12 @@
 import 'package:bylaive/Authentication/SignUp.dart';
 import 'package:bylaive/Authentication/Userredirect.dart';
+import 'package:bylaive/Controllers/Auth_controller.dart';
 import 'package:bylaive/Splash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:velocity_x/velocity_x.dart';
 import '../Home_Pages/HomePage.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,22 +38,24 @@ class _loginpageState extends State<loginpage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: (Container(
+        color: Colors.white,
         height: MediaQuery.of(context).size.height,
         key: _formKey,
         width: double.infinity,
         child: Column(
           children: <Widget>[
             Container(
+
               decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: NetworkImage(
                           "https://i.postimg.cc/vBjh5tyH/Mobile-login-amico-1.png"),
                       fit: BoxFit.cover)),
-              height: context.height/2,
+              height: context.height/2.4,
             ),
             Text('Welcome back',style: GoogleFonts.robotoSlab(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 30)),
             Padding(
-              padding: const EdgeInsets.all(14.0),
+              padding: const EdgeInsets.only(left: 20.0,right: 20,top: 20,bottom: 20),
               child: Column(
                 children: [
                   TextField(
@@ -61,7 +65,7 @@ class _loginpageState extends State<loginpage> {
                       //   helperText: 'Helper Text',
                       //  counterText: '0 characters',
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25),
+                        borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide(color: Color(0xFFFCAF3B)),
                       ),
                     ),
@@ -77,7 +81,7 @@ class _loginpageState extends State<loginpage> {
                       //   helperText: 'Helper Text',
                       // counterText: '0 characters',
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25),
+                        borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide(
                           color: Color(0xFFFCAF3B),
                         ),
@@ -87,7 +91,13 @@ class _loginpageState extends State<loginpage> {
                     controller: _passwordController,
                   ),
                 ],
-              ),
+              ) .box
+                  .color(Colors.white)
+                  .rounded
+                  .clip(Clip.antiAlias)
+                  .outerShadowMd
+              .padding(EdgeInsets.symmetric(vertical: 30,horizontal: 10))
+                  .make(),
             ),
 
 
@@ -105,7 +115,7 @@ class _loginpageState extends State<loginpage> {
             widget.showRegisterpage();
             },child: Text('New user? Create an account')),
             const SizedBox(
-              height: 30,
+              height: 5,
             ),
             SignInButtonBuilder(
               backgroundColor: Colors.white,
